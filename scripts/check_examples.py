@@ -49,7 +49,11 @@ def main():
             if value:
                 passed = result.returncode == 0 and result.stdout == SUCCESS and result.stderr == ""
             else:
-                passed = result.returncode == 1 and result.stdout == "" and ERROR in result.stderr
+                expected_errors = [ERROR + "\n"]
+                if language == "go":
+                    # `go run` can append its own diagnostic after the demo exits.
+                    expected_errors.append(ERROR + "\nexit status 1\n")
+                passed = result.returncode == 1 and result.stdout == "" and result.stderr in expected_errors
             if not passed:
                 raise SystemExit(f"FAIL {language}: {label}; unexpected exit code or output (output withheld)")
             print(f"PASS {language}: {label}")

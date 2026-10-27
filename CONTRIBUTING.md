@@ -9,6 +9,16 @@ Keep each example a small standard-library terminal program. All nine must:
 
 ## Checks
 
+Run the checker's standard-library regression tests from the repository root:
+
+```sh
+python3 -m unittest discover -s tests -v
+```
+
+These tests require only Python and check exact output validation, including
+the known `exit status 1` trailer from `go run`. Unexpected child output is
+rejected without being printed in failure diagnostics.
+
 With all listed runtimes and CMake installed, run from the repository root:
 
 ```sh

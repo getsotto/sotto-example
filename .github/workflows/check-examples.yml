@@ -22,6 +22,8 @@ jobs:
       - uses: actions/setup-python@751276eafca55f10f252026015f43c488f2322ba
         with:
           python-version: '3.13'
+      - name: Test the example checker
+        run: python -m unittest discover -s tests -v
       - uses: actions/setup-node@94196ee1d15439c1b6651cd87ef14e88ec435966
         with:
           node-version: '24'
